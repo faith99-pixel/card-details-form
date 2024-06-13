@@ -36,6 +36,7 @@ const FormContainer: FunctionComponent<FormContainerProps> = () => {
     setErrorMessages((prev) => ({ ...prev, [name]: false }));
     setFormValues((prev) => ({ ...prev, [name]: value }));
   };
+
   const clearFields = () => {
     setFormValues({
       cardName: "",
@@ -121,11 +122,15 @@ const FormContainer: FunctionComponent<FormContainerProps> = () => {
             <img src="/images/card-logo.svg" alt="" width={70} height={70} />
           </div>
           <p className="relative top-48 left-28 z-10 text-3xl tracking-wider">
-            0000 0000 0000 0000
+            {formValues.cardNumber || "0000 0000 0000 0000"}
           </p>
-          <div className="flex items-center justify-between relative top-44 left-20 z-10 p-8 ">
-            <h4 className="text-sm">JANE APPLESEED</h4>
-            <p>00/00</p>
+          <div className="flex items-center justify-between relative top-44 left-20 z-10 p-8">
+            <h4 className="text-sm">
+              {formValues.cardName || "JANE APPLESEED"}
+            </h4>
+            <p>{`${formValues.expiryMonth || "00"}/${
+              formValues.expiryYear || "00"
+            }`}</p>
           </div>
           <div className="relative left-20 bottom-10">
             <img src={cardFront} alt="" width={400} height={400} />
@@ -169,7 +174,7 @@ const FormContainer: FunctionComponent<FormContainerProps> = () => {
                 className="text-[#220930] mb-2 text-sm tracking-wide"
                 htmlFor="cardNumber"
               >
-                CARD NUMBER CARD NUMBER
+                CARD NUMBER
               </label>
               <input
                 id="cardNumber"
